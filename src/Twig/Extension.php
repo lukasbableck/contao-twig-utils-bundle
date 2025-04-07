@@ -4,13 +4,28 @@ namespace Lukasbableck\ContaoTwigUtilsBundle\Twig;
 use Contao\FilesModel;
 use Contao\Validator;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class Extension extends AbstractExtension {
+	public function getFilters(): array {
+		return [
+			new TwigFilter('json_decode', [$this, 'jsonDecode']),
+		];
+	}
+
 	public function getFunctions(): array {
 		return [
 			new TwigFunction('file', [$this, 'getFilesModel']),
 		];
+	}
+
+	public function jsonDecode($json, $assoc = false) {
+		if (\is_string($json)) {
+			$json = json_decode($json, $assoc);
+		}
+
+		return $json;
 	}
 
 	public function getFilesModel($fileIdentifier) {

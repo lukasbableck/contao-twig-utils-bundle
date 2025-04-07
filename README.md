@@ -2,7 +2,10 @@
 
 This bundle provides some useful additional twig functions and filters for Contao Open Source CMS.
 
-(Currently only the `file` function is implemented.)
+## filters
+
+### `json_decode(?bool $assoc = false)`
+Decodes a JSON string into a PHP array or object.
 
 ## Functions
 
