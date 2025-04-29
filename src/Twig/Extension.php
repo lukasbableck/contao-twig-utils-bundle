@@ -1,6 +1,7 @@
 <?php
 namespace Lukasbableck\ContaoTwigUtilsBundle\Twig;
 
+use Contao\Controller;
 use Contao\FilesModel;
 use Contao\Validator;
 use Twig\Extension\AbstractExtension;
@@ -16,6 +17,7 @@ class Extension extends AbstractExtension {
 
 	public function getFunctions(): array {
 		return [
+			new TwigFunction('contao_form', [Controller::class, 'getForm']),
 			new TwigFunction('file', [$this, 'getFilesModel']),
 		];
 	}
