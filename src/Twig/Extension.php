@@ -3,6 +3,7 @@ namespace Lukasbableck\ContaoTwigUtilsBundle\Twig;
 
 use Contao\Controller;
 use Contao\FilesModel;
+use Contao\PageModel;
 use Contao\Validator;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -19,6 +20,7 @@ class Extension extends AbstractExtension {
 		return [
 			new TwigFunction('contao_form', [Controller::class, 'getForm']),
 			new TwigFunction('file', [$this, 'getFilesModel']),
+			new TwigFunction('page', [$this, 'getPageModel']),
 		];
 	}
 
@@ -43,6 +45,18 @@ class Extension extends AbstractExtension {
 
 		if ($objFile !== null) {
 			return $objFile;
+		}
+	}
+
+	public function getPageModel($pageIdentifier, $published = false) {
+		if ($published) {
+			$objPage = PageModel::findPublishedByIdOrAlias($pageIdentifier);
+		} else {
+			$objPage = PageModel::findByIdOrAlias($pageIdentifier);
+		}
+
+		if ($objPage !== null) {
+			return $objPage;
 		}
 	}
 }
