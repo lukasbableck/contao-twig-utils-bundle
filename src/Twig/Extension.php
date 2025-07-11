@@ -18,7 +18,7 @@ class Extension extends AbstractExtension {
 
 	public function getFunctions(): array {
 		return [
-			new TwigFunction('contao_form', [Controller::class, 'getForm']),
+			new TwigFunction('contao_form', [Controller::class, 'getForm'], ['is_safe' => ['html']]),
 			new TwigFunction('file', [$this, 'getFilesModel']),
 			new TwigFunction('page', [$this, 'getPageModel']),
 		];
