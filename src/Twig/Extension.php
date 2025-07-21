@@ -1,6 +1,7 @@
 <?php
 namespace Lukasbableck\ContaoTwigUtilsBundle\Twig;
 
+use Contao\Config;
 use Contao\Controller;
 use Contao\FilesModel;
 use Contao\PageModel;
@@ -19,6 +20,7 @@ class Extension extends AbstractExtension {
 	public function getFunctions(): array {
 		return [
 			new TwigFunction('contao_form', [Controller::class, 'getForm'], ['is_safe' => ['html']]),
+			new TwigFunction('contao_config', [$this, 'getConfig']),
 			new TwigFunction('file', [$this, 'getFilesModel']),
 			new TwigFunction('page', [$this, 'getPageModel']),
 		];
@@ -58,5 +60,9 @@ class Extension extends AbstractExtension {
 		if ($objPage !== null) {
 			return $objPage;
 		}
+	}
+
+	public function getConfig() {
+		return Config::getInstance();
 	}
 }
