@@ -74,10 +74,12 @@ class Extension extends AbstractExtension {
 
         if (\is_array($object)) {
             foreach ($object as $key => $value) {
-                $object[$key] = $this->toArray($value);
+                if (is_iterable($value) || \is_object($value)) {
+                    $object[$key] = $this->toArray($value);
+                }
             }
         }
 
-        return (array) $object;
+        return $object;
     }
 }
