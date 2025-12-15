@@ -12,6 +12,9 @@ Converts a given value to an array. If the value is already an array, its childr
 
 ## Functions
 
+### `contao_config()`
+Returns the Contao Config object.
+
 ### `contao_form(id|alias)`
 Generates a form and returns the html output.
 
