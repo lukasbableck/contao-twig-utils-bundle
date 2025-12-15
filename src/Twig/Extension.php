@@ -14,6 +14,7 @@ class Extension extends AbstractExtension {
 	public function getFilters(): array {
 		return [
 			new TwigFilter('json_decode', [$this, 'jsonDecode']),
+			new TwigFilter('to_array', [$this, 'toArray']),
 		];
 	}
 
@@ -64,5 +65,19 @@ class Extension extends AbstractExtension {
 
 	public function getConfig() {
 		return Config::getInstance();
+	}
+
+	public function toArray(mixed $object): array {
+		if (\is_object($object)) {
+			$object = get_object_vars($object);
+		}
+
+		if (\is_array($object)) {
+			foreach ($object as $key => $value) {
+				$object[$key] = $this->toArray($value);
+			}
+		}
+
+		return (array) $object;
 	}
 }

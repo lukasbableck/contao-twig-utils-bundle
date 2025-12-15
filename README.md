@@ -7,6 +7,9 @@ This bundle provides some useful additional twig functions and filters for Conta
 ### `json_decode(?bool $assoc = false)`
 Decodes a JSON string into a PHP array or object.
 
+### `to_array`
+Converts a given value to an array. If the value is already an array, its children are converted to arrays as well.
+
 ## Functions
 
 ### `contao_form(id|alias)`
