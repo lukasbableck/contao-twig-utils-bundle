@@ -24,6 +24,7 @@ class Extension extends AbstractExtension {
             new TwigFunction('contao_config', [$this, 'getConfig']),
             new TwigFunction('file', [$this, 'getFilesModel']),
             new TwigFunction('page', [$this, 'getPageModel']),
+            new TwigFunction('reading_time', [$this, 'calculateReadingTime'])
         ];
     }
 
@@ -81,5 +82,12 @@ class Extension extends AbstractExtension {
         }
 
         return $object;
+    }
+
+    public function calculateReadingTime(string $text, int $wordsPerMinute = 250): int {
+        $wordCount = str_word_count(strip_tags($text));
+        $readingTime = (int) ceil($wordCount / ($wordsPerMinute / 60));
+
+        return max($readingTime, 1);
     }
 }

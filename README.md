@@ -23,3 +23,6 @@ Returns the FilesModel for the given id, uuid or path.
 
 ### `page(id|alias, ?bool $published = false)`
 Returns the PageModel for the given id or alias. If `$published` is set to `true`, it will only return published pages.
+
+### `reading_time(text, ?int $wpm = 250)`
+Estimates the reading time for the given text based on the provided words per minute (default is 250 wpm). The function returns the reading time in seconds.
